@@ -98,8 +98,8 @@ end)
 tab1:Slider("This is a slider",{Min = -100, Max = 100, Def = 0},function(v) -- text, minimum, maximum, default, callback
     print("Slider: " .. tostring(v))
 end)
-tab3:Label("e") -- will default to normal label if no type
+tab1:Label("e") -- will default to normal label if no type
 tab1:Label("e", "Label")
-tab2:Label("e", "Warning")
+tab1:Label("e", "Warning")
 tab1:Label("e", "Info")
 ```

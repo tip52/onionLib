@@ -447,20 +447,20 @@ function Library:Window(name)
     --#region closeBtn
     GUI["a"].MouseButton1Down:Connect(
         function()
-            local AnchorTween =
-                TweenService:Create(
-                GUI["2"],
-                TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-                {AnchorPoint = Vector2.new(0.5, 1)}
-            )
+
+            for i,v in pairs(GUI['2']:GetDescendants()) do
+                if v.Name == "Navbar" or v.Name == "Tabholder" or v.Name == "Topbar" or v.Name == "DropShadowHolder" then
+                v:Destroy()
+                end
+            end
+
             local closeTween =
                 TweenService:Create(
                 GUI["2"],
-                TweenInfo.new(0.7, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-                {Position = UDim2.new(0.5, 0, 0, 0)}
+                TweenInfo.new(1.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+                {Size = UDim2.new(0, 0, 0, 0)}
             )
             closeTween:Play()
-            AnchorTween:Play()
             closeTween.Completed:Wait()
             GUI["1"]:Destroy()
         end
@@ -788,6 +788,7 @@ function Library:Window(name)
             local istoggled = Default or false
             local text = Text or "Toggle"
             local toggle = {}
+            Callback(istoggled)
             --#region ui
             -- StarterGui.OnionLib.Main.Tabholder.TopTab.Toggle
             toggle["39"] = Instance.new("Frame", Tab["1d"])

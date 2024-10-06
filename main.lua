@@ -32,9 +32,12 @@ Credit to Gerad ui lib and twink ui lib for the slider calcs
 ]]
 --#region ui lib
 local Library = {}
-local TweenService = game:GetService("TweenService")
-local mouse = game.Players.LocalPlayer:GetMouse()
-local UserInputService = game:GetService("UserInputService")
+local TweenService = cloneref(game:GetService("TweenService"))
+local playersService = cloneref(game:GetService("Players"))
+local coreGui = cloneref(game:GetService("CoreGui"))
+local mouse = playersService.LocalPlayer:GetMouse()
+local UserInputService = cloneref(game:GetService("UserInputService"))
+local to_string = clonefunction(tostring)
 
 function Ripple(obj)
     task.spawn(
@@ -82,7 +85,7 @@ function Library:Window(name)
     local winName = name or "OnionLib"
     --#region make window
     -- StarterGui.OnionLib
-    GUI["1"] = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+    GUI["1"] = Instance.new("ScreenGui", coreGui)
     GUI["1"]["IgnoreGuiInset"] = true
     GUI["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets
     GUI["1"]["Name"] = [[OnionLib]]
@@ -1022,7 +1025,7 @@ function Library:Window(name)
         function Tab:Keycode(options, callback)
             local text = options[1] or "Keycode"
             local default = options[2] or nil
-            local defaultText = default and tostring(default):gsub("Enum.KeyCode.", "") or ""
+            local defaultText = default and to_string(default):gsub("Enum.KeyCode.", "") or ""
             local Keycode = {}
             local isPress = true
             if default then
@@ -1092,7 +1095,7 @@ function Library:Window(name)
                 function(input, chat)
                     if input.UserInputType == Enum.UserInputType.Keyboard and not chat and not isPress then
                         callback(input.KeyCode)
-                        Keycode["44"]["Text"] = tostring(input.KeyCode):gsub("Enum.KeyCode.", "")
+                        Keycode["44"]["Text"] = to_string(input.KeyCode):gsub("Enum.KeyCode.", "")
                         isPress = true
                     end
                 end
